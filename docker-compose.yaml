@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mysfitfrontend:
+    image: nginx
+    ports:
+    - "8080:80"
+    volumes:
+    - "$PWD/frontend/static:/usr/share/nginx/html"
+
+  mysfitapi:
+    build: api/monolith-service/.
+    ports:
+    - "8081:80"
+    environment:
+    - "AWS_ACCESS_KEY_ID=xyz"
+    - "AWS_SECRET_ACCESS_KEY=xyz"
+    
+  dynamodb:
+    image: amazon/dynamodb-local
+    command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/
+    volumes:
+     - "/tmp/dynamodb:/home/dynamodblocal/data"
+    ports:
+     - "8000:8000"
