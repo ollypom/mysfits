@@ -1,4 +1,4 @@
-# Run Mythical Mysfits Locally
+# Running Mythical Mysfits Locally
 
 https://github.com/aws-samples/amazon-ecs-mythicalmysfits-workshop
 
@@ -38,7 +38,7 @@ be installed before running the scripts `pip install boto3`.
 
 If you a leverage a Local DynamoDB Instance, the variable `MYSFIT_ENV=LOCAL`
 will need to be exported before using the scripts. If you do not export this, a
-DynamoDB table will be created in AWS, and sample data will be loadded into it
+DynamoDB table will be created in AWS, and sample data will be loaded into it
 the cloud.
 
 ### Browse to the Frontpage
@@ -58,10 +58,17 @@ when running the API in AWS, they may need to be passed into the container.
 - `MYSFIT_ENV` - This is not required when running in AWS. However when running
   locally `MYSFIT_ENV=LOCAL` should be exported.
 
-- `AWS_ACCESS_KEY_ID` & `AWS_SECRET_ACCESS_KEY` - If you are leveraging EKS IRSA or
-  an ECS Task Role, these variables will already be set within the Container. If
-  you are running the container locally then these variables will need to be
-  set. If you are running a local DynamoDB container, these values could be
-  anythinas they are not required by a local DynamoDB (as shown in the compose
-  file). If the API is communicating with an DynamoDB Table hosted in the cloud,
-  then a Access Key and Secret Key with the relevant permissions is required.
+- `AWS_ACCESS_KEY_ID` & `AWS_SECRET_ACCESS_KEY` - If the api is deployed onto
+  AWS, then EKS IRSA or an ECS Task Role will automatically set these variables.
+  
+  If the container is running locally then these variables will need to be set.
+  A local DynamoDB container does not need real AWS credentials, so noddy values
+  like those set in the `docker-compose.yml` file will do. If the API is
+  communicating with a DynamoDB Table hosted in the cloud, then an Access Key
+  and Secret Key with the relevant permissions is required.
+
+## API Image
+
+The Python API Docker Image is hosted on Docker Hub too:
+
+https://hub.docker.com/repository/docker/ollypom/mysfits
