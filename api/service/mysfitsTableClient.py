@@ -31,11 +31,11 @@ elif not 'MYSFIT_ENV' in os.environ:
     client = boto3.client('dynamodb',
     region_name='eu-west-1')
 
-if not 'DDB_TABLE' in os.environ:
-  logging.info('DDB_TABLE is not defined')
+if not 'DDB_TABLE_NAME' in os.environ:
+  logging.info('DDB_TABLE_NAME is not defined')
   sys.exit()
 
-table_name = os.environ.get('DDB_TABLE')
+table_name = os.environ.get('DDB_TABLE_NAME')
 logging.info('Dynamodb Table is {}'.format(table_name))
 
 def getAllMysfits():

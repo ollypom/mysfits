@@ -51,9 +51,9 @@ There are a few environment variables required when running the API
 microservice. They are already defined in the `docker-compose.yml` file. However
 when running the API in AWS, they may need to be passed into the container.
 
-- `DDB_TABLE` - *Required* - The name of the DynamoDB table that has been
+- `DDB_TABLE_NAME` - *Required* - The name of the DynamoDB table that has been
   pre-create and loaded with data. If you leverage the `create-dynamo.py` and
-  `load-dynamo.py` scripts, the table name wil be mysfits. `DDB_TABLE=mysfits`.
+  `load-dynamo.py` scripts, the table name wil be mysfits. `DDB_TABLE_NAME=mysfits`.
 
 - `MYSFIT_ENV` - This is not required when running in AWS. However when running
   locally `MYSFIT_ENV=LOCAL` should be exported.

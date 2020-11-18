@@ -20,7 +20,7 @@ services:
     - "AWS_ACCESS_KEY_ID=xyz"
     - "AWS_SECRET_ACCESS_KEY=xyz"
     - "MYSFIT_ENV=LOCAL"
-    - "DDB_TABLE=mysfits"
+    - "DDB_TABLE_NAME=mysfits"
     
   dynamodb:
     user: root
