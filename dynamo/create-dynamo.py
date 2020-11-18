@@ -1,12 +1,24 @@
 import boto3
+import os
 
-dynamo_url = 'http://localhost:9000'
-table_name = 'misfits'
+#################################
+### Configure Dynamodb Client ###
+#################################
+if os.environ.get('MYSFIT_ENV') == 'LOCAL':
+    dynamo_url = 'http://localhost:9000'
 
-dynamodb = boto3.resource('dynamodb',
-    endpoint_url=dynamo_url,
-    region_name='eu-west-1')
+    dynamodb = boto3.resource('dynamodb',
+        endpoint_url=dynamo_url,
+        region_name='eu-west-1')
 
+elif not 'MYSFIT_ENV' in os.environ:
+    dynamodb = boto3.resource('dynamodb',
+        region_name='eu-west-1')
+
+#################################
+##### Create Dynamodb Table #####
+#################################
+table_name = 'mysfits'
 response = dynamodb.create_table(
     TableName = table_name,
     ProvisionedThroughput = {

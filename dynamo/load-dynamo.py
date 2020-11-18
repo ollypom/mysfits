@@ -1,12 +1,24 @@
 import boto3
+import os
 
-dynamo_url = 'http://localhost:9000'
-table_name = 'misfits'
+#################################
+### Configure Dynamodb Client ###
+#################################
+if os.environ.get('MYSFIT_ENV') == 'LOCAL':
+    dynamo_url = 'http://localhost:9000'
 
-db_client = boto3.client('dynamodb',
-    endpoint_url=dynamo_url,
-    region_name='eu-west-1')
+    db_client = boto3.client('dynamodb',
+      endpoint_url=dynamo_url,
+      region_name='eu-west-1')
 
+elif not 'MYSFIT_ENV' in os.environ:
+    db_client = boto3.client('dynamodb',
+      region_name='eu-west-1')
+
+#################################
+#### Bulk Push Items to DDB #####
+#################################
+table_name = 'mysfits'
 response = db_client.batch_write_item(
     RequestItems={
       table_name:[

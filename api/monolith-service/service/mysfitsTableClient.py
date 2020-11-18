@@ -2,17 +2,41 @@ import boto3
 import json
 import logging
 import os
+import sys
 from collections import defaultdict
+
+logging.basicConfig(stream=sys.stdout,
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
 
 # create a DynamoDB client using boto3. The boto3 library will automatically
 # use the credentials associated with our ECS task role to communicate with
 # DynamoDB, so no credentials need to be stored/managed at all by our code!
-dynamo_url = 'http://dynamodb'
-table_name = 'misfits'
+if os.environ.get('MYSFIT_ENV') == 'LOCAL':
+    if not 'AWS_ACCESS_KEY_ID' in os.environ:
+        logging.info('AWS_ACCESS_KEY_ID is not defined')
+        sys.exit()
+    if not 'AWS_SECRET_ACCESS_KEY' in os.environ:
+        logging.info('AWS_SECRET_ACCESS_KEY is not defined')
+        sys.exit()
 
-client = boto3.client('dynamodb',
-    endpoint_url=dynamo_url,
+    logging.info('App Running In Local Mode')
+    dynamo_url = 'http://dynamodb'
+
+    client = boto3.client('dynamodb',
+        endpoint_url=dynamo_url,
+        region_name='eu-west-1')
+
+elif not 'MYSFIT_ENV' in os.environ:
+    client = boto3.client('dynamodb',
     region_name='eu-west-1')
+
+if not 'DDB_TABLE' in os.environ:
+  logging.info('DDB_TABLE is not defined')
+  sys.exit()
+
+table_name = os.environ.get('DDB_TABLE')
+logging.info('Dynamodb Table is {}'.format(table_name))
 
 def getAllMysfits():
 

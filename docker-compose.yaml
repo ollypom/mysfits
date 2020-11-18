@@ -6,7 +6,7 @@ services:
     ports:
     - "8080:80"
     volumes:
-    - "/c/projects/gobuild/frontend/static:/usr/share/nginx/html"
+    - "/c/projects/gobuild/frontend/static:/usr/share/nginx/html" # Customise Me
 
   mysfitapi:
     build: api/monolith-service/.
@@ -15,6 +15,8 @@ services:
     environment:
     - "AWS_ACCESS_KEY_ID=xyz"
     - "AWS_SECRET_ACCESS_KEY=xyz"
+    - "MYSFIT_ENV=LOCAL"
+    - "DDB_TABLE=mysfits"
     
   dynamodb:
     user: root
