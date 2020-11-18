@@ -1,6 +1,6 @@
 import boto3
 
-dynamo_url = 'http://0.0.0.0:8000'
+dynamo_url = 'http://localhost:9000'
 table_name = 'misfits'
 
 dynamodb = boto3.resource('dynamodb',

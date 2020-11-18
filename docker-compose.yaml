@@ -6,7 +6,7 @@ services:
     ports:
     - "8080:80"
     volumes:
-    - "$PWD/frontend/static:/usr/share/nginx/html"
+    - "/c/projects/gobuild/frontend/static:/usr/share/nginx/html"
 
   mysfitapi:
     build: api/monolith-service/.
@@ -17,9 +17,13 @@ services:
     - "AWS_SECRET_ACCESS_KEY=xyz"
     
   dynamodb:
+    user: root
     image: amazon/dynamodb-local
     command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/
     volumes:
-     - "/tmp/dynamodb:/home/dynamodblocal/data"
+     - "dynamodb:/home/dynamodblocal/data"
     ports:
-     - "8000:8000"
+     - "9000:8000"
+
+volumes:
+  dynamodb:

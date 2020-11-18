@@ -7,7 +7,7 @@ from collections import defaultdict
 # create a DynamoDB client using boto3. The boto3 library will automatically
 # use the credentials associated with our ECS task role to communicate with
 # DynamoDB, so no credentials need to be stored/managed at all by our code!
-dynamo_url = 'http://dynamodb:8000'
+dynamo_url = 'http://dynamodb'
 table_name = 'misfits'
 
 client = boto3.client('dynamodb',
