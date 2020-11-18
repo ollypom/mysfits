@@ -1,0 +1,25 @@
+FROM python:3.7-slim
+
+# Define Owner
+LABEL maintainer=olly@example.com
+
+# Copy Source Code
+COPY ./service /MythicalMysfitsService
+
+# Install Python Packages 
+WORKDIR /MythicalMysfitsService
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r ./requirements.txt
+
+# Define a Healthcheck
+HEALTHCHECK --interval=10s --timeout=10s --start-period=30s \
+  CMD ["python", "healthcheck.py"]
+
+# Specify a Non Root User
+USER nobody
+
+EXPOSE 8080
+
+# Configure Run Commands
+ENTRYPOINT ["python"]
+CMD ["mythicalMysfitsService.py"]

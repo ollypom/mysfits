@@ -1,0 +1,37 @@
+# Compile Image 
+######################
+FROM python:3.7-slim AS compile-image
+
+# Install Python Packages
+WORKDIR /app
+ADD service/requirements.txt /app/requirements.txt
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir --user -r requirements.txt
+
+# Run Image
+######################
+FROM gcr.io/distroless/python3-debian10 AS run-image
+
+# Copy Installed Packages from Compile Image
+COPY --from=compile-image /root/.local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
+ENV PYTHONPATH=/usr/local/lib/python3.7/site-packages
+
+# Define Owner
+LABEL maintainer=olly@example.com
+
+# Copy Application Code
+COPY ./service /MythicalMysfitsService
+WORKDIR /MythicalMysfitsService
+
+# Define a Healthcheck
+HEALTHCHECK --interval=10s --timeout=10s --start-period=30s \
+  CMD ["python", "healthcheck.py"]
+
+# Specify a Non Root User
+USER nobody
+
+EXPOSE 8080
+
+# Configure Run Commands
+CMD ["mythicalMysfitsService.py"]

@@ -10,9 +10,12 @@ services:
     - "/c/projects/gobuild/frontend/static:/usr/share/nginx/html" # Customise Me
 
   mysfitapi:
-    build: api/monolith-service/.
+    image: ollypom/mysfit:v3
+    build:
+      context: api/.
+      dockerfile: Dockerfile.v3 
     ports:
-    - "8081:80"
+    - "8081:8080"
     environment:
     - "AWS_ACCESS_KEY_ID=xyz"
     - "AWS_SECRET_ACCESS_KEY=xyz"
