@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 # Install OS Packages
 RUN apt-get update -y
@@ -6,15 +6,12 @@ RUN apt-get install -y python3-pip python3-dev build-essential
 RUN pip3 install --upgrade pip
  
 # Copy Source Code
-COPY ./service /MythicalMysfitsService
+WORKDIR /MythicalMysfitsService
+COPY ./service .
 
 # Install Python Packages 
-WORKDIR /MythicalMysfitsService
 RUN pip install -r ./requirements.txt
 
-# Expose the Application
-EXPOSE 8080
- 
 # Configure Run Commands
 ENTRYPOINT ["python3"]
 CMD ["mythicalMysfitsService.py"]
