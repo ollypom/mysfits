@@ -7,10 +7,10 @@ are configured to run locally in containers.
 
 Static Site <-> Python Api(s) <-> DynamoDB
 
-- When ran locally the static site is fronted by an NGINX reverse proxy. In AWS this will be a S3
-  Static Site.
-- The Python API(s) are deployed as a flask container deployed locally. This same flask
-  container can be reused in ECS or EKS.
+- When ran locally the static site is fronted by an NGINX reverse proxy. In AWS
+  this will be a S3 Static Site.
+- The Python API(s) are deployed as a flask container deployed locally. This
+  same flask container can be reused in ECS or EKS.
 - The DynamoDB is deployed locally following this
   [documentation](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html).
   In AWS a managed DynamoDB will be used.
@@ -38,8 +38,8 @@ be installed before running the scripts `pip install boto3`.
 
 If you a leverage a Local DynamoDB Instance, the variable `MYSFIT_ENV=LOCAL`
 will need to be exported before using the scripts. If you do not export this, a
-DynamoDB table will be created in AWS, and sample data will be loaded into it
-the cloud.
+DynamoDB table will be created in AWS, and sample data will be loaded into the
+cloud.
 
 ### Browse to the Frontpage
 
@@ -71,4 +71,4 @@ when running the API in AWS, they may need to be passed into the container.
 
 The Python API Docker Image is hosted on Docker Hub too:
 
-https://hub.docker.com/repository/docker/ollypom/mysfits
+https://hub.docker.com/r/ollypom/mysfits
