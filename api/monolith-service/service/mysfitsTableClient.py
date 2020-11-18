@@ -21,7 +21,7 @@ if os.environ.get('MYSFIT_ENV') == 'LOCAL':
         sys.exit()
 
     logging.info('App Running In Local Mode')
-    dynamo_url = 'http://dynamodb'
+    dynamo_url = 'http://dynamodb:8000'
 
     client = boto3.client('dynamodb',
         endpoint_url=dynamo_url,
