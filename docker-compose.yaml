@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   mysfitfrontend:
 #    build: frontend/.
@@ -7,7 +5,9 @@ services:
     ports:
     - "8080:80"
     volumes:
-    - "/c/projects/gobuild/frontend/static:/usr/share/nginx/html" # Customise Me
+      - type: bind
+        source: $PWD/frontend/static
+        target: /usr/share/nginx/html
 
   mysfitapi:
     image: ollypom/mysfit:v3
@@ -27,7 +27,9 @@ services:
     image: amazon/dynamodb-local
     command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/
     volumes:
-     - "dynamodb:/home/dynamodblocal/data"
+      - type: volume
+        source: dynamodb
+        target: /home/dynamodblocal/data
     ports:
      - "9000:8000"
 
