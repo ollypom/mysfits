@@ -1,6 +1,7 @@
 name: dependabot-merger
 
 on: pull_request
+    types: labeled
 
 jobs:
   build:
