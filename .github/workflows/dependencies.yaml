@@ -11,13 +11,33 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       -
-        name: Build
-        id: docker_build
+        name: Build v1
+        id: docker_build_imagev1
         uses: docker/build-push-action@v2
         with:
-          tags: ollypom/mysfits:cicd
+          tags: ollypom/mysfits:cicdv1
+          context: ./api/
+          file: ./Dockerfile.v1
+      -
+        name: Build v2
+        id: docker_build_imagev2
+        uses: docker/build-push-action@v2
+        with:
+          tags: ollypom/mysfits:cicdv2
+          context: ./api/
+          file: ./Dockerfile.v2
+      -
+        name: Build v3
+        id: docker_build_imagev3
+        uses: docker/build-push-action@v2
+        with:
+          tags: ollypom/mysfits:cicdv3
+          context: ./api/
+          file: ./Dockerfile.v3
