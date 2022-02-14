@@ -2,7 +2,7 @@ boto3==1.18.65
 botocore==1.21.65
 certifi==2021.10.8
 chardet==4.0.0
-charset-normalizer==2.0.7
+charset-normalizer==2.0.12
 click==8.0.3
 Flask==2.0.2
 Flask-Cors==3.0.10
