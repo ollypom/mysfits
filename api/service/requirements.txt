@@ -8,7 +8,7 @@ Flask==2.0.2
 Flask-Cors==3.0.10
 idna==3.3
 itsdangerous==2.0.1
-Jinja2==3.0.2
+Jinja2==3.1.2
 jmespath==0.10.0
 MarkupSafe==2.0.1
 python-dateutil==2.8.2
