@@ -20,7 +20,7 @@ jobs:
       -
         name: Build v1
         id: docker_build_imagev1
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           tags: ollypom/mysfits:cicdv1
           context: ./api/.
@@ -28,7 +28,7 @@ jobs:
       -
         name: Build v2
         id: docker_build_imagev2
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           tags: ollypom/mysfits:cicdv2
           context: ./api/.
@@ -36,7 +36,7 @@ jobs:
       -
         name: Build v3
         id: docker_build_imagev3
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           tags: ollypom/mysfits:cicdv3
           context: ./api/.
