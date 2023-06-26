@@ -1,6 +1,6 @@
-# Compile Image 
+# Compile Image
 ######################
-FROM python:3.7-slim AS compile-image
+FROM public.ecr.aws/docker/library/python:3.9-slim AS compile-image
 
 # Install Python Packages
 WORKDIR /app
@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # Run Image
 ######################
-FROM gcr.io/distroless/python3-debian10 AS run-image
+FROM gcr.io/distroless/python3-debian11 AS run-image
 
 # Add Labels
 LABEL maintainer=olly@example.com
@@ -25,8 +25,8 @@ HEALTHCHECK --interval=10s --timeout=10s --start-period=30s \
   CMD ["python", "healthcheck.py"]
 
 # Copy Installed Packages from Compile Image
-ENV PYTHONPATH=/usr/local/lib/python3.7/site-packages
-COPY --from=compile-image /root/.local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
+ENV PYTHONPATH=/usr/local/lib/python3.9/site-packages
+COPY --from=compile-image /root/.local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
 
 # Copy Application Code
 WORKDIR /MythicalMysfitsService

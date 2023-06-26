@@ -1,4 +1,4 @@
-FROM python:3.7-slim
+FROM public.ecr.aws/docker/library/python:3.9-slim
 
 # Add Labels
 LABEL maintainer=olly@example.com
@@ -12,7 +12,7 @@ HEALTHCHECK --interval=10s --timeout=10s --start-period=30s \
 WORKDIR /MythicalMysfitsService
 COPY ./service .
 
-# Install Python Packages 
+# Install Python Packages
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r ./requirements.txt
 
