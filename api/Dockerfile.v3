@@ -1,6 +1,6 @@
 # Compile Image
 ######################
-FROM public.ecr.aws/docker/library/python:3.9-slim AS compile-image
+FROM public.ecr.aws/docker/library/python:3.11-slim AS compile-image
 
 # Install Python Packages
 WORKDIR /app
@@ -25,8 +25,8 @@ HEALTHCHECK --interval=10s --timeout=10s --start-period=30s \
   CMD ["python", "healthcheck.py"]
 
 # Copy Installed Packages from Compile Image
-ENV PYTHONPATH=/usr/local/lib/python3.9/site-packages
-COPY --from=compile-image /root/.local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+ENV PYTHONPATH=/usr/local/lib/python3.11/site-packages
+COPY --from=compile-image /root/.local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 
 # Copy Application Code
 WORKDIR /MythicalMysfitsService
